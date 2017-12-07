@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'nativebridge-ios_Example' do
+  pod 'nativebridge-ios', :path => '../'
+
+  target 'nativebridge-ios_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
