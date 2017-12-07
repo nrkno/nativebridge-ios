@@ -1,6 +1,6 @@
 import UIKit
 import XCTest
-import nativebridge-ios
+import nativebridge_ios
 
 class Tests: XCTestCase {
     
