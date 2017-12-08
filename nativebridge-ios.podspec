@@ -21,15 +21,15 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/Hans Olav Færevaag Nome/nativebridge-ios'
+  s.homepage         = 'https://github.com/nrkno/nativebridge-ios'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Hans Olav Færevaag Nome' => 'Hans.Olav.Farevaag.Nome@nrk.no' }
-  s.source           = { :git => 'https://github.com/Hans Olav Færevaag Nome/nativebridge-ios.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/nrkno/nativebridge-ios.git', :tag => s.version.to_s }
   s.module_name      = 'NativeBridge'
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
 
   s.source_files = 'nativebridge-ios/Classes/**/*'
   
@@ -38,6 +38,6 @@ TODO: Add long description of the pod here.
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  # s.ios.framework = 'WebKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end

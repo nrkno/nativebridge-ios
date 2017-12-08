@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "summary": "A short description of nativebridge-ios.",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/Hans Olav Færevaag Nome/nativebridge-ios",
+  "homepage": "https://github.com/nrkno/nativebridge-ios",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,12 +12,12 @@
     "Hans Olav Færevaag Nome": "Hans.Olav.Farevaag.Nome@nrk.no"
   },
   "source": {
-    "git": "https://github.com/Hans Olav Færevaag Nome/nativebridge-ios.git",
+    "git": "https://github.com/nrkno/nativebridge-ios.git",
     "tag": "0.1.0"
   },
   "module_name": "NativeBridge",
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
   "source_files": "nativebridge-ios/Classes/**/*"
 }
