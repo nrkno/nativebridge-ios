@@ -40,10 +40,10 @@ class ViewController: UIViewController {
     }
 
     private func setupWebViewConnection() {
-        enum ExampleType: String, TypeRepresentable {
+        enum ExampleTopic: String, TopicRepresentable {
             case ping
 
-            var key: String { return rawValue}
+            var name: String { return rawValue}
         }
 
         struct IncomingData: Codable {
@@ -55,9 +55,9 @@ class ViewController: UIViewController {
         }
 
         webViewConnection = WebViewConnection(webView: webView)
-        webViewConnection.addHandler(for: ExampleType.ping) { (incoming: IncomingData, connection) in
+        webViewConnection.addHandler(for: ExampleTopic.ping) { (incoming: IncomingData, connection) in
             let outgoing = OutgoingData(outgoingMessage: "Got incoming message: '\(incoming.incomingMessage)'")
-            connection.send(data: outgoing, for: ExampleType.ping, completion: { (reply) in
+            connection.send(data: outgoing, for: ExampleTopic.ping, completion: { (reply) in
                 switch reply {
                 case .success(_): print("Success!")
                 case .error(let error): print (error)

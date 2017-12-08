@@ -14,9 +14,9 @@ class WebViewConnectionTests: XCTestCase {
     func testSendMessage() {
         let evaluator = Evaluator({ (nil, nil) })
         let connection = WebViewConnection(webView: evaluator)
-        let data = DataUnit(myProperty: "Some value")
+        let data = TestDataObject(myProperty: "Some value")
 
-        connection.send(data: data, for: DataUnitType.testType) { reply in
+        connection.send(data: data, for: Topic.test) { reply in
             switch reply {
             case .success(let value):
                 XCTAssertTrue(value == nil)
@@ -25,7 +25,7 @@ class WebViewConnectionTests: XCTestCase {
             }
         }
 
-        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"type\":\"testType\",\"data\":{\"myProperty\":\"Some value\"}}}))"
+        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"topic\":\"test\",\"data\":{\"myProperty\":\"Some value\"}}}))"
         XCTAssertEqual(expectedScript, evaluator.lastCommand)
     }
 
@@ -34,13 +34,13 @@ class WebViewConnectionTests: XCTestCase {
         let connection = WebViewConnection(webView: evaluator)
         let promise = expectation(description: "async")
 
-        connection.addHandler(for: DataUnitType.testType) { (data: DataUnit, _) in
+        connection.addHandler(for: Topic.test) { (data: TestDataObject, _) in
             XCTAssertEqual("Some value", data.myProperty)
             promise.fulfill()
         }
 
         let data = ["myProperty": "Some value"]
-        connection.receive(payload: ["type": "testType", "data": data])
+        connection.receive(payload: ["topic": "test", "data": data])
         wait(for: [promise], timeout: 1)
     }
 
@@ -50,7 +50,7 @@ class WebViewConnectionTests: XCTestCase {
 
         connection.receive(payload: "illegal format")
 
-        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"type\":\"error\",\"data\":{\"errors\":[{\"message\":\"Illegal payload format\",\"errorCode\":1}]}}}))"
+        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"topic\":\"error\",\"data\":{\"errors\":[{\"message\":\"Illegal payload format\",\"errorCode\":1}]}}}))"
         XCTAssertEqual(expectedScript, evaluator.lastCommand!)
     }
 
@@ -58,9 +58,9 @@ class WebViewConnectionTests: XCTestCase {
         let evaluator = Evaluator({ (nil, nil) })
         let connection = WebViewConnection(webView: evaluator)
 
-        connection.receive(payload: ["missing": "types"])
+        connection.receive(payload: ["missing": "fields"])
 
-        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"type\":\"error\",\"data\":{\"errors\":[{\"message\":\"Missing field: 'type'\",\"errorCode\":2},{\"message\":\"Missing field: 'data'\",\"errorCode\":3}]}}}))"
+        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"topic\":\"error\",\"data\":{\"errors\":[{\"message\":\"Missing field: 'topic'\",\"errorCode\":2},{\"message\":\"Missing field: 'data'\",\"errorCode\":3}]}}}))"
         XCTAssertEqual(expectedScript, evaluator.lastCommand!)
     }
 
@@ -68,9 +68,9 @@ class WebViewConnectionTests: XCTestCase {
         let evaluator = Evaluator({ (nil, nil) })
         let connection = WebViewConnection(webView: evaluator)
 
-        connection.receive(payload: ["type": "testType"])
+        connection.receive(payload: ["topic": "test"])
 
-        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"type\":\"testType\",\"data\":{\"errors\":[{\"message\":\"Missing field: 'data'\",\"errorCode\":3}]}}}))"
+        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"topic\":\"test\",\"data\":{\"errors\":[{\"message\":\"Missing field: 'data'\",\"errorCode\":3}]}}}))"
         XCTAssertEqual(expectedScript, evaluator.lastCommand!)
     }
 
@@ -79,9 +79,9 @@ class WebViewConnectionTests: XCTestCase {
         let connection = WebViewConnection(webView: evaluator)
 
         let data = ["myProperty": "Some value"]
-        connection.receive(payload: ["type": "testType", "data": data])
+        connection.receive(payload: ["topic": "test", "data": data])
 
-        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"type\":\"testType\",\"data\":{\"errors\":[{\"message\":\"Missing type handler\",\"errorCode\":4}]}}}))"
+        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"topic\":\"test\",\"data\":{\"errors\":[{\"message\":\"Missing topic handler\",\"errorCode\":4}]}}}))"
         XCTAssertEqual(expectedScript, evaluator.lastCommand!)
     }
 
@@ -89,25 +89,23 @@ class WebViewConnectionTests: XCTestCase {
         let evaluator = Evaluator({ (nil, nil) })
         let connection = WebViewConnection(webView: evaluator)
 
-        connection.addHandler(for: DataUnitType.testType) { (_: DataUnit, _) in }
+        connection.addHandler(for: Topic.test) { (_: TestDataObject, _) in }
 
         let data = ["unknownProperty": "Some value"]
-        connection.receive(payload: ["type": "testType", "data": data])
+        connection.receive(payload: ["topic": "test", "data": data])
 
-        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"type\":\"testType\",\"data\":{\"errors\":[{\"message\":\"Invalid data for type. Expected data type: 'DataUnit'\",\"errorCode\":5}]}}}))"
+        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"topic\":\"test\",\"data\":{\"errors\":[{\"message\":\"Invalid data for topic. Expected data type: 'TestDataObject'\",\"errorCode\":5}]}}}))"
         XCTAssertEqual(expectedScript, evaluator.lastCommand!)
     }
 }
 
-enum DataUnitType: String, TypeRepresentable {
-    case testType
+enum Topic: String, TopicRepresentable {
+    case test
 
-    var key: String {
-        return rawValue
-    }
+    var name: String { return rawValue }
 }
 
-struct DataUnit: Codable {
+struct TestDataObject: Codable {
     var myProperty: String
 }
 

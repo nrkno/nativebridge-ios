@@ -40,8 +40,8 @@ extension JSONSerialization {
     }
 }
 
-public protocol TypeRepresentable {
-    var key: String { get }
+public protocol TopicRepresentable {
+    var name: String { get }
 }
 
 public final class WebViewConnection {
@@ -62,28 +62,28 @@ extension WebViewConnection {
     public struct EmptyData: Codable {}
 
     private enum PayloadKey: String {
-        case type
+        case topic
         case data
     }
 
-    private enum FallbackErrorType: String, TypeRepresentable {
+    private enum FallbackErrorTopic: String, TopicRepresentable {
         case error
 
-        var key: String { return rawValue }
+        var name: String { return rawValue }
     }
 
     private enum ConnectionErrorType {
         case illegalPayloadFormat
         case missingField(PayloadKey)
-        case missingTypeHandler
+        case missingTopicHandler
         case invalidDataForHandler(String)
 
         var message: String {
             switch self {
             case .illegalPayloadFormat: return "Illegal payload format"
             case .missingField(let payloadKey): return "Missing field: '\(payloadKey)'"
-            case .missingTypeHandler: return "Missing type handler"
-            case .invalidDataForHandler(let expectedDataType): return "Invalid data for type. Expected data type: '\(expectedDataType)'"
+            case .missingTopicHandler: return "Missing topic handler"
+            case .invalidDataForHandler(let expectedDataType): return "Invalid data for topic. Expected data type: '\(expectedDataType)'"
             }
         }
 
@@ -92,10 +92,10 @@ extension WebViewConnection {
             case .illegalPayloadFormat: return 1
             case .missingField(let payLoadKey):
                 switch payLoadKey {
-                case .type: return 2
+                case .topic: return 2
                 case .data: return 3
                 }
-            case .missingTypeHandler: return 4
+            case .missingTopicHandler: return 4
             case .invalidDataForHandler: return 5
             }
         }
@@ -112,13 +112,13 @@ extension WebViewConnection {
 
     private struct StringEncodingError: Error {}
 
-    public func send(data: Codable, for type: TypeRepresentable, completion: ((Reply) -> Void)? = nil) {
-        send(data: data, for: type.key, completion: completion)
+    public func send(data: Codable, for topic: TopicRepresentable, completion: ((Reply) -> Void)? = nil) {
+        send(data: data, for: topic.name, completion: completion)
     }
 
-    private func send(data: Codable, for type: String, completion: ((Reply) -> Void)? = nil) {
+    private func send(data: Codable, for topic: String, completion: ((Reply) -> Void)? = nil) {
         var payload: [String: Any] = [:]
-        payload[PayloadKey.type.rawValue] = type
+        payload[PayloadKey.topic.rawValue] = topic
         payload[PayloadKey.data.rawValue] = data.json
 
         do {
@@ -148,25 +148,25 @@ extension WebViewConnection {
         }
     }
 
-    private func send(errorTypes: [ConnectionErrorType], for type: String? = nil) {
+    private func send(errorTypes: [ConnectionErrorType], for topic: String? = nil) {
         let errorDetails = errorTypes.map {ErrorDetailObject(message: $0.message, errorCode: $0.errorCode)}
         let error = ErrorObject(errors: errorDetails)
-        send(data: error, for: type ?? FallbackErrorType.error.key)
+        send(data: error, for: topic ?? FallbackErrorTopic.error.name)
     }
 }
 
 extension WebViewConnection {
-    public func addHandler<T>(for type: TypeRepresentable, handler: @escaping (T, WebViewConnection) -> Void) where T: Codable {
+    public func addHandler<T>(for topic: TopicRepresentable, handler: @escaping (T, WebViewConnection) -> Void) where T: Codable {
         let generator: (Any) -> Void = { [weak self] data in
             guard let `self` = self else { return }
             guard let dataObject: T = JSONSerialization.from(json: data) else {
-                self.send(errorTypes: [.invalidDataForHandler(String(describing: T.self))], for: type.key)
+                self.send(errorTypes: [.invalidDataForHandler(String(describing: T.self))], for: topic.name)
                 return
             }
             handler(dataObject, self)
         }
 
-        self.generators[type.key] = generator
+        self.generators[topic.name] = generator
     }
 
     public func receive(payload: Any) {
@@ -176,19 +176,19 @@ extension WebViewConnection {
         }
 
         var errorTypes: [ConnectionErrorType] = []
-        let receivedType: String? = payloadDictionary.get(key: PayloadKey.type.rawValue, orElse: {
-            errorTypes.append(.missingField(.type))
+        let receivedTopic: String? = payloadDictionary.get(key: PayloadKey.topic.rawValue, orElse: {
+            errorTypes.append(.missingField(.topic))
         })
         let receivedData: Any? = payloadDictionary.get(key: PayloadKey.data.rawValue, orElse: {
             errorTypes.append(.missingField(.data))
         })
-        guard let type = receivedType, let data = receivedData else {
-            send(errorTypes: errorTypes, for: receivedType)
+        guard let topic = receivedTopic, let data = receivedData else {
+            send(errorTypes: errorTypes, for: receivedTopic)
             return
         }
 
-        guard let generator = generators[type] else {
-            send(errorTypes: [ConnectionErrorType.missingTypeHandler], for: type)
+        guard let generator = generators[topic] else {
+            send(errorTypes: [ConnectionErrorType.missingTopicHandler], for: topic)
             return }
 
         generator(data)
