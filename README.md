@@ -15,10 +15,6 @@ it, simply add the following line to your Podfile:
 pod 'nativebridge-ios'
 ```
 
-## Author
-
-Hans Olav Færevaag Nome, Hans.Olav.Farevaag.Nome@nrk.no
-
 ## License
 
 nativebridge-ios is available under the MIT license. See the LICENSE file for more info.
