@@ -85,7 +85,7 @@ class ViewController: UIViewController {
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 if (window.webkit && window.webkit.messageHandlers) {
-                    const detail = {type: "ping", data: {incomingMessage: "Ping!"}}
+                    const detail = {topic: "ping", data: {incomingMessage: "Ping!"}}
                     print("Sending:")
                     print(JSON.stringify(detail))
                     window.webkit.messageHandlers.nativebridgeiOS.postMessage(detail);
@@ -94,7 +94,7 @@ class ViewController: UIViewController {
 
             window.addEventListener('nativebridge', function(event) {
                 const message = event.detail;
-                if(message.type === 'ping'){
+                if(message.topic === 'ping'){
                     print("Did receive")
                     print(JSON.stringify(event.detail))
                 }
