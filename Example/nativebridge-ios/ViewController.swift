@@ -10,18 +10,6 @@ import UIKit
 import WebKit
 import NativeBridge
 
-class ScriptMessageHandlerThingy: NSObject, WKScriptMessageHandler {
-    weak var delegate: WKScriptMessageHandler?
-
-    init(delegate: WKScriptMessageHandler) {
-        self.delegate = delegate
-    }
-
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        delegate?.userContentController(userContentController, didReceive: message)
-    }
-}
-
 class ViewController: UIViewController {
     private var webView: WKWebView!
     private var webViewConnection: WebViewConnection!
@@ -43,7 +31,7 @@ class ViewController: UIViewController {
         let userContentController = WKUserContentController()
 
         // Listen for messages posted to "nativebridgeiOS"
-        userContentController.add(ScriptMessageHandlerThingy(delegate: self), name: NativeBridgeMessageName.nativebridgeiOS.rawValue)
+        userContentController.add(self, name: NativeBridgeMessageName.nativebridgeiOS.rawValue)
 
         let webViewConfiguration = WKWebViewConfiguration()
         webViewConfiguration.userContentController = userContentController
