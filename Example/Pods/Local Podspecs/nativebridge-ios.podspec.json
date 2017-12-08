@@ -15,6 +15,7 @@
     "git": "https://github.com/Hans Olav Færevaag Nome/nativebridge-ios.git",
     "tag": "0.1.0"
   },
+  "module_name": "NativeBridge",
   "platforms": {
     "ios": "8.0"
   },

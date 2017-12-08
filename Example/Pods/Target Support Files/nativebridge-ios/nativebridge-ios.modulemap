@@ -1,4 +1,4 @@
-framework module nativebridge_ios {
+framework module NativeBridge {
   umbrella header "nativebridge-ios-umbrella.h"
 
   export *

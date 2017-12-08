@@ -9,7 +9,7 @@
 import Foundation
 import WebKit
 
-protocol JavascriptEvaluating {
+public protocol JavascriptEvaluating {
     func evaluateJavaScript(_ javaScriptString: String, completionHandler: ((Any?, Error?) -> Void)?)
 }
 
@@ -40,26 +40,26 @@ extension JSONSerialization {
     }
 }
 
-protocol TypeRepresentable {
+public protocol TypeRepresentable {
     var key: String { get }
 }
 
-final class WebViewConnection {
+public final class WebViewConnection {
     let webView: JavascriptEvaluating
-    fileprivate var generators: [String: (Any) -> Void] = [:]
+    private var generators: [String: (Any) -> Void] = [:]
 
-    init(webView: JavascriptEvaluating) {
+    public init(webView: JavascriptEvaluating) {
         self.webView = webView
     }
 }
 
 extension WebViewConnection {
-    enum Reply {
+    public enum Reply {
         case success(Any?)
         case error(Error)
     }
 
-    struct EmptyData: Codable {}
+    public struct EmptyData: Codable {}
 
     private enum PayloadKey: String {
         case type
@@ -112,7 +112,7 @@ extension WebViewConnection {
 
     private struct StringEncodingError: Error {}
 
-    func send(data: Codable, for type: TypeRepresentable, completion: ((Reply) -> Void)? = nil) {
+    public func send(data: Codable, for type: TypeRepresentable, completion: ((Reply) -> Void)? = nil) {
         send(data: data, for: type.key, completion: completion)
     }
 
@@ -156,7 +156,7 @@ extension WebViewConnection {
 }
 
 extension WebViewConnection {
-    func addHandler<T>(for type: TypeRepresentable, handler: @escaping (T, WebViewConnection) -> Void) where T: Codable {
+    public func addHandler<T>(for type: TypeRepresentable, handler: @escaping (T, WebViewConnection) -> Void) where T: Codable {
         let generator: (Any) -> Void = { [weak self] data in
             guard let `self` = self else { return }
             guard let dataObject: T = JSONSerialization.from(json: data) else {
@@ -169,7 +169,7 @@ extension WebViewConnection {
         self.generators[type.key] = generator
     }
 
-    func receive(payload: Any) {
+    public func receive(payload: Any) {
         guard let payloadDictionary = payload as? [String: Any] else {
             send(errorTypes: [.illegalPayloadFormat])
             return

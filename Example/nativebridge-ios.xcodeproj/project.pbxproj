@@ -14,7 +14,7 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		9A953EF11FDA103200547811 /* WebViewConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A953EEF1FDA0F8C00547811 /* WebViewConnectionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,7 +31,7 @@
 		06A6D994C3DE47E963D04EBF /* Pods_nativebridge_ios_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nativebridge_ios_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		234619E934692A772DC28AE0 /* Pods-nativebridge-ios_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nativebridge-ios_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-nativebridge-ios_Tests/Pods-nativebridge-ios_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		247D2B5C10554D36F14BC8BA /* Pods-nativebridge-ios_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nativebridge-ios_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-nativebridge-ios_Tests/Pods-nativebridge-ios_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		59CD7124B6984F2D454E7C20 /* nativebridge-ios.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = "nativebridge-ios.podspec"; path = "../nativebridge-ios.podspec"; sourceTree = "<group>"; };
+		59CD7124B6984F2D454E7C20 /* nativebridge-ios.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "nativebridge-ios.podspec"; path = "../nativebridge-ios.podspec"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* nativebridge-ios_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nativebridge-ios_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,12 +41,12 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* nativebridge-ios_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nativebridge-ios_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		923B3F0B105DCDCBC4AA289D /* Pods-nativebridge-ios_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nativebridge-ios_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-nativebridge-ios_Example/Pods-nativebridge-ios_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9A4AFB54D7E5A270086A656F /* Pods-nativebridge-ios_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nativebridge-ios_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-nativebridge-ios_Example/Pods-nativebridge-ios_Example.release.xcconfig"; sourceTree = "<group>"; };
-		A8310D0302777C19DAE8C0D5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		9A953EEF1FDA0F8C00547811 /* WebViewConnectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewConnectionTests.swift; sourceTree = "<group>"; };
+		A8310D0302777C19DAE8C0D5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		B63092195D242D8F278B390B /* Pods_nativebridge_ios_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nativebridge_ios_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C6739689DFB5A9BF3F7C0002 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		C6739689DFB5A9BF3F7C0002 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +124,7 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				9A953EEF1FDA0F8C00547811 /* WebViewConnectionTests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -318,9 +318,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-nativebridge-ios_Tests/Pods-nativebridge-ios_Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/nativebridge-ios/NativeBridge.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NativeBridge.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -334,11 +337,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-nativebridge-ios_Example/Pods-nativebridge-ios_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/nativebridge-ios/nativebridge_ios.framework",
+				"${BUILT_PRODUCTS_DIR}/nativebridge-ios/NativeBridge.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nativebridge_ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NativeBridge.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -379,7 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				9A953EF11FDA103200547811 /* WebViewConnectionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

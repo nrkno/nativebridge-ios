@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double nativebridge_iosVersionNumber;
-FOUNDATION_EXPORT const unsigned char nativebridge_iosVersionString[];
+FOUNDATION_EXPORT double NativeBridgeVersionNumber;
+FOUNDATION_EXPORT const unsigned char NativeBridgeVersionString[];
 

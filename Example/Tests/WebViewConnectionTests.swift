@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import nrk_no
+import NativeBridge
 
 class WebViewConnectionTests: XCTestCase {
 
