@@ -1,15 +1,15 @@
 {
   "name": "nativebridge-ios",
   "version": "0.1.0",
-  "summary": "A short description of nativebridge-ios.",
-  "description": "TODO: Add long description of the pod here.",
+  "summary": "The native part of a communication bridge between WKWebView and your app.",
+  "description": "When used together with its javascript counterpart, 'nativebridge', this framework enables two way communication between\nyour app and a WKWebView.",
   "homepage": "https://github.com/nrkno/nativebridge-ios",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "Hans Olav Færevaag Nome": "Hans.Olav.Farevaag.Nome@nrk.no"
+    "NRK Medieutvikling": "mobil-tilbakemelding@nrk.no"
   },
   "source": {
     "git": "https://github.com/nrkno/nativebridge-ios.git",
@@ -19,5 +19,8 @@
   "platforms": {
     "ios": "9.0"
   },
-  "source_files": "nativebridge-ios/Classes/**/*"
+  "source_files": "nativebridge-ios/Classes/**/*",
+  "ios": {
+    "frameworks": "WebKit"
+  }
 }

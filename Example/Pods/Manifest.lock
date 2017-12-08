@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  nativebridge-ios: b5bf831831d803383c8067d13c756e705c7bb519
+  nativebridge-ios: e27e41e299dff64da657476bf133ece04f6a68da
 
 PODFILE CHECKSUM: 409e1f4b38e93fac92fc93a58f6d3ccbcdc3617b
 
