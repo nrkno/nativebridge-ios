@@ -1,5 +1,5 @@
 PODS:
-  - nativebridge-ios (0.1.0)
+  - nativebridge-ios (0.1.1)
 
 DEPENDENCIES:
   - nativebridge-ios (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  nativebridge-ios: 55c9b0a2e8794ccc01e080ecee94b5940bd0aa68
+  nativebridge-ios: b82a651805e54d762e0cf9b46d789c68e144ad04
 
 PODFILE CHECKSUM: 409e1f4b38e93fac92fc93a58f6d3ccbcdc3617b
 
