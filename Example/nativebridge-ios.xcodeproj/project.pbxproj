@@ -171,7 +171,6 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				5D656FACCF7CB2AB251DC033 /* [CP] Embed Pods Frameworks */,
-				1B717F61955135BA919AACAD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -191,7 +190,6 @@
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
 				5A985C781716D0D7D5EDFA1F /* [CP] Embed Pods Frameworks */,
-				3B8E9DCB2A11BA7E86A968AB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -264,36 +262,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1B717F61955135BA919AACAD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-nativebridge-ios_Example/Pods-nativebridge-ios_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3B8E9DCB2A11BA7E86A968AB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-nativebridge-ios_Tests/Pods-nativebridge-ios_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		4C291051802619224E07F1A7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
