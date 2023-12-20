@@ -286,7 +286,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-nativebridge-ios_Tests/Pods-nativebridge-ios_Tests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-nativebridge-ios_Tests/Pods-nativebridge-ios_Tests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/nativebridge-ios/NativeBridge.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -295,7 +295,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-nativebridge-ios_Tests/Pods-nativebridge-ios_Tests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nativebridge-ios_Tests/Pods-nativebridge-ios_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5D656FACCF7CB2AB251DC033 /* [CP] Embed Pods Frameworks */ = {
@@ -304,7 +304,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-nativebridge-ios_Example/Pods-nativebridge-ios_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-nativebridge-ios_Example/Pods-nativebridge-ios_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/nativebridge-ios/NativeBridge.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -313,7 +313,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-nativebridge-ios_Example/Pods-nativebridge-ios_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nativebridge-ios_Example/Pods-nativebridge-ios_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E4A0A2E5869C67BD6BA34C1E /* [CP] Check Pods Manifest.lock */ = {
