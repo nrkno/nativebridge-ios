@@ -14,6 +14,6 @@ your app and the javascript hosted in a WKWebView.
   s.module_name      = 'NativeBridge'
 
   s.ios.deployment_target = '9.0'
-  s.source_files = 'nativebridge-ios/Classes/**/*'
+  s.source_files = 'Sources/nativebridge-ios/Classes/**/*'
   s.ios.framework = 'WebKit'
 end

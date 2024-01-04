@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  nativebridge-ios: b82a651805e54d762e0cf9b46d789c68e144ad04
+  nativebridge-ios: e34abf7effd040bcd8b9c2b93160246613fc3d05
 
 PODFILE CHECKSUM: 409e1f4b38e93fac92fc93a58f6d3ccbcdc3617b
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.13.0
