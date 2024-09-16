@@ -10,7 +10,10 @@ import Foundation
 import WebKit
 
 public protocol JavascriptEvaluating {
-    func evaluateJavaScript(_ javaScriptString: String, completionHandler: ((Any?, Error?) -> Void)?)
+    func evaluateJavaScript(
+        _ javaScriptString: String,
+        completionHandler: (@MainActor @Sendable (Any?, (any Error)?) -> Void)?
+    )
 }
 
 extension WKWebView: JavascriptEvaluating {}
