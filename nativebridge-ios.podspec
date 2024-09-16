@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'nativebridge-ios'
-  s.version          = '0.1.2'
+  s.version          = '0.2.0'
   s.summary          = 'The native part of a communication bridge between javascript running in a WKWebView and your app.'
   s.description      = <<-DESC
 When used together with its javascript counterpart, 'nativebridge', this framework enables communication between
