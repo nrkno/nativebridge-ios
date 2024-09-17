@@ -10,7 +10,10 @@ import Foundation
 import WebKit
 
 public protocol JavascriptEvaluating {
-    func evaluateJavaScript(_ javaScriptString: String, completionHandler: ((Any?, Error?) -> Void)?)
+    func evaluateJavaScript(
+        _ javaScriptString: String,
+        completionHandler: (@MainActor @Sendable (Any?, (any Error)?) -> Void)?
+    )
 }
 
 extension WKWebView: JavascriptEvaluating {}
@@ -130,7 +133,7 @@ extension WebViewConnection {
     }
 
     private func jsonString(from object: Any) throws -> String {
-        let jsonData = try JSONSerialization.data(withJSONObject: object, options: [])
+        let jsonData = try JSONSerialization.data(withJSONObject: object, options: [.sortedKeys])
         if let json = String(data: jsonData, encoding: .utf8) {
             return json
         } else {
