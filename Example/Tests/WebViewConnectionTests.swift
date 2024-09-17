@@ -25,8 +25,8 @@ class WebViewConnectionTests: XCTestCase {
             }
         }
 
-        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"topic\":\"test\",\"data\":{\"myProperty\":\"Some value\"}}}))"
-        XCTAssertEqual(expectedScript, evaluator.lastCommand)
+        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"data\":{\"myProperty\":\"Some value\"},\"topic\":\"test\"}}))"
+        XCTAssertEqual(expectedScript, evaluator.lastCommand!)
     }
 
     func testReceive() {
@@ -50,7 +50,7 @@ class WebViewConnectionTests: XCTestCase {
 
         connection.receive(payload: "illegal format")
 
-        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"topic\":\"error\",\"data\":{\"errors\":[{\"message\":\"Illegal payload format\",\"errorCode\":1}]}}}))"
+        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"data\":{\"errors\":[{\"errorCode\":1,\"message\":\"Illegal payload format\"}]},\"topic\":\"error\"}}))"
         XCTAssertEqual(expectedScript, evaluator.lastCommand!)
     }
 
@@ -60,7 +60,7 @@ class WebViewConnectionTests: XCTestCase {
 
         connection.receive(payload: ["missing": "fields"])
 
-        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"topic\":\"error\",\"data\":{\"errors\":[{\"message\":\"Missing field: 'topic'\",\"errorCode\":2},{\"message\":\"Missing field: 'data'\",\"errorCode\":3}]}}}))"
+        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"data\":{\"errors\":[{\"errorCode\":2,\"message\":\"Missing field: 'topic'\"},{\"errorCode\":3,\"message\":\"Missing field: 'data'\"}]},\"topic\":\"error\"}}))"
         XCTAssertEqual(expectedScript, evaluator.lastCommand!)
     }
 
@@ -70,7 +70,7 @@ class WebViewConnectionTests: XCTestCase {
 
         connection.receive(payload: ["topic": "test"])
 
-        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"topic\":\"test\",\"data\":{\"errors\":[{\"message\":\"Missing field: 'data'\",\"errorCode\":3}]}}}))"
+        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"data\":{\"errors\":[{\"errorCode\":3,\"message\":\"Missing field: 'data'\"}]},\"topic\":\"test\"}}))"
         XCTAssertEqual(expectedScript, evaluator.lastCommand!)
     }
 
@@ -81,7 +81,7 @@ class WebViewConnectionTests: XCTestCase {
         let data = ["myProperty": "Some value"]
         connection.receive(payload: ["topic": "test", "data": data])
 
-        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"topic\":\"test\",\"data\":{\"errors\":[{\"message\":\"Missing topic handler\",\"errorCode\":4}]}}}))"
+        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"data\":{\"errors\":[{\"errorCode\":4,\"message\":\"Missing topic handler\"}]},\"topic\":\"test\"}}))"
         XCTAssertEqual(expectedScript, evaluator.lastCommand!)
     }
 
@@ -94,7 +94,7 @@ class WebViewConnectionTests: XCTestCase {
         let data = ["unknownProperty": "Some value"]
         connection.receive(payload: ["topic": "test", "data": data])
 
-        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"topic\":\"test\",\"data\":{\"errors\":[{\"message\":\"Invalid data for topic. Expected data type: 'TestDataObject'\",\"errorCode\":5}]}}}))"
+        let expectedScript = "window.dispatchEvent(new CustomEvent(\"nativebridge\", {\"detail\":{\"data\":{\"errors\":[{\"errorCode\":5,\"message\":\"Invalid data for topic. Expected data type: 'TestDataObject'\"}]},\"topic\":\"test\"}}))"
         XCTAssertEqual(expectedScript, evaluator.lastCommand!)
     }
 }
@@ -109,7 +109,8 @@ struct TestDataObject: Codable {
     var myProperty: String
 }
 
-private final class Evaluator: JavascriptEvaluating {
+private final class Evaluator: @preconcurrency JavascriptEvaluating {
+    
     typealias EvaluationResult = (Any?, Error?)
 
     let evaluator: () -> (EvaluationResult)
@@ -119,7 +120,8 @@ private final class Evaluator: JavascriptEvaluating {
         self.evaluator = evaluator
     }
 
-    func evaluateJavaScript(_ javaScriptString: String, completionHandler: ((Any?, Error?) -> Void)?) {
+    @MainActor
+    func evaluateJavaScript(_ javaScriptString: String, completionHandler: (@MainActor @Sendable (Any?, (any Error)?) -> Void)?) {
         lastCommand = javaScriptString
         let result = evaluator()
         completionHandler?(result.0, result.1)

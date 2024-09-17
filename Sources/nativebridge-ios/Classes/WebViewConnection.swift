@@ -133,7 +133,7 @@ extension WebViewConnection {
     }
 
     private func jsonString(from object: Any) throws -> String {
-        let jsonData = try JSONSerialization.data(withJSONObject: object, options: [])
+        let jsonData = try JSONSerialization.data(withJSONObject: object, options: [.sortedKeys])
         if let json = String(data: jsonData, encoding: .utf8) {
             return json
         } else {

@@ -13,7 +13,7 @@ your app and the javascript hosted in a WKWebView.
   s.source           = { :git => 'https://github.com/nrkno/nativebridge-ios.git', :tag => s.version.to_s }
   s.module_name      = 'NativeBridge'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '12.4'
   s.source_files = 'Sources/nativebridge-ios/Classes/**/*'
   s.ios.framework = 'WebKit'
 end
